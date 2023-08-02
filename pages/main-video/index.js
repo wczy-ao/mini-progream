@@ -1,16 +1,16 @@
 // pages/main-video/index.js
-import HYRequest from '../../services/request'
+import { getTopMV } from '../../services/video'
 Page({
   data: {
     topMVList: []
   },
   onLoad() {
-    HYRequest.get('/top/mv',{
-      limit: 20,
-      offset: 0
-    }).then(res => {
+    this.getMvList()
+  },
+  getMvList() {
+    getTopMV(0).then(res => {
       this.setData({
-        topMVList:res.data
+        topMVList: res.data
       })
     })
   }

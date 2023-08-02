@@ -1,66 +1,46 @@
 // pages/detail-video/index.js
-Page({
+import { getMVDetail, getMVURL, getRelateMV } from '../../services/video'
 
+Page({
   /**
    * 页面的初始数据
    */
   data: {
-
+    mvInfo: {},
+    mvURL: {},
+    relatedMV: []
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad(options) {
-
+  onLoad: function (options) {
+    const id = options.id
+console.log(options);
+    this.getVideoInfo(id)
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady() {
+  getVideoInfo: function(id) {
+    // 1.mv detail
+    getMVDetail(id).then(res => {
+      this.setData({ mvInfo: res.data })
+    })
 
-  },
+    // 2.mv url
+    getMVURL(id).then(res => {
+      this.setData({ mvURL: res.data })
+    })
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide() {
-
+    // 3.related mv
+    getRelateMV(id).then(res => {
+      this.setData({ relatedMV: res.data })
+    })
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload() {
+  onUnload: function () {
 
   },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh() {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom() {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage() {
-
-  }
 })

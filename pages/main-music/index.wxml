@@ -1,2 +1,15 @@
 <!--pages/main-music/index.wxml-->
-<text>pages/main-music/index.wxml</text>
+<van-search
+  shape="round"
+  background="#f7f7f7"
+  placeholder="搜索你喜欢的歌曲"
+  bind:focus="handleSearchFocus"
+/>
+
+<swiper class="banner" indicator-dots autoplay circular>
+  <block wx:for="{{bannerList}}" wx:key="bannerId">
+    <swiper-item class="item">
+      <image class="image" mode="aspectFill" src="{{item.pic}}"></image>
+    </swiper-item>
+  </block>
+</swiper>
